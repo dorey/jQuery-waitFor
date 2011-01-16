@@ -3,7 +3,7 @@
     function concatArgs(args) {return [].splice.call(args,0);}
     
     var designatedNames = {},
-        version = "0.0";
+        version = "0.1";
     
     /*-- Waiter() is created for the individual things that need
     -    to be waited on.
