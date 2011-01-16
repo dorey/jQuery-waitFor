@@ -1,0 +1,5 @@
+A jQuery micro-library to define multiple dependencies and set callbacks which are called when they are reached.
+
+See the simple example (simple_example.html) for a basic example.
+
+See comments in jquery.waitfor.js for some more info.
