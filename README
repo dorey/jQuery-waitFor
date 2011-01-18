@@ -3,3 +3,8 @@ A jQuery micro-library to define multiple dependencies and set callbacks which a
 See the simple example (simple_example.html) for a basic example.
 
 See comments in jquery.waitfor.js for some more info.
+
+Versions-
+================================================
+v0.1		A very simple example case using timers to show $.waitFor
+			in use.
