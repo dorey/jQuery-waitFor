@@ -64,7 +64,9 @@
         
 		var waiter = new Waiter(this, waiterName, opts);
 		designatedNames[waiterName] = waiter;
-		return waiter;
+		return function(cb){
+		    return WaitFor(waiter, cb);
+		};
 	}
 	
 
