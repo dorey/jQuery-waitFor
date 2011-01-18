@@ -6,5 +6,5 @@ See comments in jquery.waitfor.js for some more info.
 
 Versions-
 ================================================
-v0.1		A very simple example case using timers to show $.waitFor
-			in use.
+v0.1		A very simple example case using timers to show $.waitFor in use.
+v0.1.1		Includes a new example for google maps. Fixed some bugs from previous release.

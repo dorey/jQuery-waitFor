@@ -3,7 +3,7 @@
     function concatArgs(args) {return [].splice.call(args,0);}
     
     var designatedNames = {},
-        version = "0.1";
+        version = "0.1.1";
     
     /*-- Waiter() is created for the individual things that need
     -    to be waited on.
@@ -82,7 +82,7 @@
 	$.extend(Waiting.prototype, {
 	    startWaiters: function(){
 	        $(this.waiters).each(function(){
-    	        if(!this.$begun) {this.$begin();}
+    	        if(!this.$begun && !this.$finished) {this.$begin();}
     	    });
 	    },
 	    checkWaiters: function(){
