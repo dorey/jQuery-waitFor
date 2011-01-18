@@ -36,7 +36,7 @@
         },
         $_finish: function(){
             this.$finished = true;
-            if('undefined'!==typeof this.$_finish) {
+            if('function'===typeof this._finish) {
                 this._finish();
             }
             $(this.waitings).each(function(){
