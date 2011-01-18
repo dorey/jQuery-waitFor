@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Wait For</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="jquery.waitfor.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+	<ul id="info">
+	</ul>
+	<script type="text/javascript" charset="utf-8">
+
+		function printInfo(str){ $("ul#info").append($("<li />").text(str));}
+		
+		// $.waiter now returns a function that can be passed a single callback.
+		var TwoSecondTimer = $.waiter('twoSeconds', {
+			begin: function(){
+				printInfo("Starting 2 Second Timer");
+				window.setTimeout(this.$finish, 2000)
+			}
+		});
+
+		// This is an example of the enclosed waiter being used.
+		TwoSecondTimer(function(){
+			printInfo("First timer is complete.");
+			TwoSecondTimer(function(){
+				// This is because in a normal situation, the callback would be executed when the
+				// waiter has executed once per page-load.
+				//
+				// A better example than a timer would be waiting on an image to load.
+				printInfo("Second timer should complete at the same time as the first.");
+			});
+		});
+
+	</script>
+</body>
+</html>

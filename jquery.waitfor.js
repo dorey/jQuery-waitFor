@@ -82,7 +82,7 @@
 	$.extend(Waiting.prototype, {
 	    startWaiters: function(){
 	        $(this.waiters).each(function(){
-    	        if(!this.$begun) {this.$begin();}
+    	        if(!this.$begun && !this.$finished) {this.$begin();}
     	    });
 	    },
 	    checkWaiters: function(){

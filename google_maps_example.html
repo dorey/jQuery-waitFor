@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Wait For</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="jquery.waitfor.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+	<ul id="info">
+	</ul>
+	<script type="text/javascript" charset="utf-8">
+
+		function printInfo(str){ $("ul#info").append($("<li />").text(str));}
+		
+		var MapsLoaded = $.waiter('googleMaps', {
+			begin: function(){
+				printInfo("Beginning load of Google Maps script into page.");
+				// Notice:
+				// Google Maps will callback a function when the script has finished loading.
+				//    We must pass a reference to this callback in the script's URL.
+				var globalReferenceToCallback = "$.w4.googleMaps.$finish";
+				$.getScript('http://maps.google.com/maps/api/js?sensor=false&callback='+globalReferenceToCallback);
+			},
+			finish: function(){
+				if($.type(google.maps)==='object') {
+					printInfo("Google Maps script is loaded");
+				} else {
+					printInfo("Google Maps script is not [properly] loaded");
+				}
+			}
+		});
+
+		function moveToParis(map){
+			map.setCenter(new google.maps.LatLng(48.88588369660559, 2.435226440429692));
+		}
+		MapsLoaded(function(){
+			var map, mapsDiv = $("<div />", {'style':'height:300px'}).html("MapsDiv");
+			$('#info').after(mapsDiv);
+			map = new google.maps.Map(mapsDiv[0], {
+				zoom: 8,
+				center: new google.maps.LatLng(40.786065407373684, -73.96322727203368),
+				mapTypeId: 'terrain'
+			});
+			
+			printInfo("Moving to Paris 10 seconds after map is loaded.")
+			window.setTimeout(function(){
+				moveToParis(map);
+			}, 10000);
+		});
+	</script>
+</body>
+</html>
