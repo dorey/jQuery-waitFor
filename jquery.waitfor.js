@@ -3,7 +3,7 @@
     function concatArgs(args) {return [].splice.call(args,0);}
     
     var designatedNames = {},
-        version = "0.1.1";
+        version = "0.1.2";
     
     /*-- Waiter() is created for the individual things that need
     -    to be waited on.
@@ -138,9 +138,39 @@
 		}
 	}
 	
+	function MakeWaitForClosure() {
+	    var args = concatArgs(arguments),
+		    _valid = true,
+		    waiters = [];
+		$(args).each(function(){
+		    if(this instanceof Waiter) {
+		        waiters.push(this);
+		    } else if("string"===$.type(this)) {
+                if('undefined'==$.type(designatedNames[String(this)])) {
+                    _valid = false;
+                    console.error("Waiter name "+String(this)+" is not defined.");
+                } else {
+                    waiters.push(designatedNames[String(this)]);
+                }
+		    } else {
+		        _valid = false;
+                console.error("Invalid waiter parameter", this);
+                return false;
+		    }
+		});
+		if(_valid) {
+		    return function(cb){
+		        var wfArgs = waiters;
+		        waiters.push(cb);
+		        return WaitFor.apply(this, wfArgs);
+		    }
+		}
+	}
+	
 	/*-- Globally accessible objects --*/
 	$.waiter = MakeWaiter;
     $.waitFor = WaitFor;
     $.waitFor.version = version;
+    $.waitForClosure = MakeWaitForClosure;
     $.w4 = designatedNames;
 })(jQuery)
