@@ -36,12 +36,12 @@
         },
         $_finish: function(){
             this.$finished = true;
-            if('undefined'!==typeof this.$_finish) {
+            if('function'===typeof this._finish) {
                 this._finish();
             }
             $(this.waitings).each(function(){
                 this.checkWaiters();
-            })
+            });
         },
         toString: function(){
             return "I am a waiter named " + this.$name;
@@ -64,7 +64,9 @@
         
 		var waiter = new Waiter(this, waiterName, opts);
 		designatedNames[waiterName] = waiter;
-		return waiter;
+		return function(cb){
+		    return WaitFor(waiter, cb);
+		};
 	}
 	
 

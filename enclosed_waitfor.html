@@ -15,7 +15,8 @@
 
 		function printInfo(str){ $("ul#info").append($("<li />").text(str));}
 		
-		$.waiter('twoSeconds', {
+		// $.waiter now returns a function that can be passed a single callback.
+		var TwoSecondTimer = $.waiter('twoSeconds', {
 			begin: function(){
 				window.setTimeout(this.$finish, 2000)
 			},
@@ -24,19 +25,13 @@
 			}
 		});
 
-		$.waiter('tenSeconds', {
-			begin: function(){
-				window.setTimeout(this.$finish, 10000)
-			},
-			finish: function(){
-				printInfo("10 second timer complete");
-			}
+		printInfo("An enclosed function 'TwoSecondTimer' has been created to give easy access to the callback.")
+
+		// This is an example of the enclosed waiter being used.
+		TwoSecondTimer(function(){
+			printInfo("Look at the code to see how easy this was.");
 		});
-		
-		printInfo("Starting to 'waitFor' 2 & 10 second timers.");
-		$.waitFor('twoSeconds', 'tenSeconds', function(){
-			printInfo("Both 2 and 10 second timers are complete");
-		});
+
 	</script>
 </body>
 </html>
