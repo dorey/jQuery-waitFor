@@ -41,7 +41,7 @@
             }
             $(this.waitings).each(function(){
                 this.checkWaiters();
-            })
+            });
         },
         toString: function(){
             return "I am a waiter named " + this.$name;

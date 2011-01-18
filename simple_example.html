@@ -22,7 +22,7 @@
 			finish: function(){
 				printInfo("2 second timer complete");
 			}
-		})
+		});
 
 		$.waiter('tenSeconds', {
 			begin: function(){
@@ -31,9 +31,9 @@
 			finish: function(){
 				printInfo("10 second timer complete");
 			}
-		})
+		});
 		
-		printInfo("Starting to 'waitFor' 2 & 10 second timers.")
+		printInfo("Starting to 'waitFor' 2 & 10 second timers.");
 		$.waitFor('twoSeconds', 'tenSeconds', function(){
 			printInfo("Both 2 and 10 second timers are complete");
 		});
