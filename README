@@ -1,11 +1,1 @@
-A jQuery micro-library to define multiple dependencies and set callbacks which are called when they are reached.
-
-See the simple example (simple_example.html) for a basic example.
-
-See comments in jquery.waitfor.js for some more info.
-
-Versions-
-================================================
-v0.1		A very simple example case using timers to show $.waitFor in use.
-v0.1.1		Includes a new example for google maps. Fixed some bugs from previous release.
-v0.1.2		Added new function for creating enclosed callback functions with multiple parameters $.waitForClosure
+Please note: This library is no longer relevant since the introduction of $.Deferred in jQuery 1.5
